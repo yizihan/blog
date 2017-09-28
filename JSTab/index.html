@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title></title>
+  <link rel="stylesheet" type="text/css" href="tab.css">
+</head>
+
+<body>
+  <div class="js-tab tab" data-config='{
+  "triggerType": "click", 
+  "effect": "fade", 
+  "invoke": 2,
+  "auto": 3000
+}'>
+    <ul class="tab-nav">
+      <li class="actived"><a href="javascript:;">新闻</a></li>
+      <li><a href="javascript:;">娱乐</a></li>
+      <li><a href="javascript:;">电影</a></li>
+      <li><a href="javascript:;">科技</a></li>
+    </ul>
+    <div class="content-wrap">
+      <div class="content-item current"><img src="images/01.jpg"></div>
+      <div class="content-item"><img src="images/02.jpg"></div>
+      <div class="content-item"><img src="images/03.jpg"></div>
+      <div class="content-item"><img src="images/04.jpg"></div>
+    </div>
+  </div>
+  <script src="https://cdn.bootcss.com/jquery/1.12.3/jquery.js"></script>
+  <script type="text/javascript" src="tab.js"></script>
+  <script type="text/javascript">
+  $(function () {
+    // new 时传入参数对象
+    /**
+     * [tab1 description]
+     * @type {Tab}
+     */
+    // var tab1 = new Tab($('.js-tab').eq(0));
+
+    Tab.init($(".js-tab"));
+
+    // jQuery方法
+    $(".js-tab").tab();
+  });
+  </script>
+</body>
+
+</html>
