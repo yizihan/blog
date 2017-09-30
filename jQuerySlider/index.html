@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <link rel="stylesheet" href="carousel.css">
+</head>
+<body>
+  <div class="J_Poster poster-main"
+       data-setting='{
+        "width": 800,
+        "height": 270,
+        "posterWidth": 640,
+        "posterHeight": 270,
+        "verticalAlign": "middle",
+        "scale": 0.9,
+        "speed": 500
+       }'>
+    <div class="poster-btn poster-prev-btn"></div>
+    <ul class="poster-list">
+      <li class="poster-item">
+        <a href="#"><img src="./images/1.jpg" alt=""></a>
+      </li>
+      <li class="poster-item">
+        <a href="#"><img src="./images/2.jpg" alt=""></a>
+      </li>
+      <li class="poster-item">
+        <a href="#"><img src="./images/3.jpg" alt=""></a>
+      </li>
+      <li class="poster-item">
+        <a href="#"><img src="./images/4.jpg" alt=""></a>
+      </li>
+      <li class="poster-item">
+        <a href="#"><img src="./images/5.jpg" alt=""></a>
+      </li>
+    </ul>
+    <div class="poster-btn poster-next-btn"></div>
+  </div>
+  <script src="jquery.js"></script>
+  <script src="carousel.js"></script>
+  <script>
+    $(function() {
+      // 单独new一个实例
+      // var carousel = new Carousel($(".J_Poster").eq(0));
+
+      // 配置参数
+      var config = {
+        "width": 1000,
+        "height": 270,
+        "posterWidth": 640,
+        "posterHeight": 270,
+        "verticalAlign": "middle",
+        "scale": 0.9,
+        "speed": 500
+      };
+
+      // 设置初始化方法，可以循环new出所有的实例
+      Carousel.init($(".J_Poster")); // 传入的是一个集合
+    });
+  </script>
+</body>
+</html>
