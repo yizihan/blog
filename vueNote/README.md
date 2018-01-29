@@ -43,28 +43,28 @@ data () {
 },
 // 实例被创建之后执行的代码
 created () {
-	loadCollection('notes')				    		// loadCollection方法获取 notes 数据表内容，得到Promise格式
-		.then(collection => {								// collection => db.getCollection('notes')
+	loadCollection('notes')				    	// loadCollection方法获取 notes 数据表内容，得到Promise格式
+		.then(collection => {				// collection => db.getCollection('notes')
 			const _entities = collection.chain()
-				.find()													// 找到所有数据
-				.simplesort('$loki', 'isdesc')	    // 按照$loki排序
-				.data()													// 找到data
+				.find()				// 找到所有数据
+				.simplesort('$loki', 'isdesc')	// 按照$loki排序
+				.data()				// 找到data
 			this.entities = _entities     		// 从数据库读取到的数据
 		})
 },
 <note 
 	v-for="entity in entities"          	// 遍历渲染得到的数据
-	v-bind:entityObjectNote="entity"			// 向Note Component传递数据entity
+	v-bind:entityObjectNote="entity"	// 向Note Component传递数据entity
 	v-bind:key="entity.$loki"           	// 设置Note Component key
-    v-on:destroyParent="destroyMethod"> // 设置自定义事件，由子组件Note $emit.destroy触发
+    v-on:destroyParent="destroyMethod"> 	// 设置自定义事件，由子组件Note $emit.destroy触发
 </note>
 
 
 // Note Component
-props: ['entityObjectNote'],		     		// 从Notes中传过来的数据
+props: ['entityObjectNote'],		     	// 从Notes中传过来的数据
 data () {
 	return {
-		entity: this.entityObjectNote,   		// 初始化data
+		entity: this.entityObjectNote,  // 初始化data
 		open: false
 	}
 },
@@ -75,7 +75,7 @@ data () {
 ></editor>
 
 // Editor Component
-props: ['entityObjectEditor'],         	// 从Note传过来的数据
+props: ['entityObjectEditor'],         		// 从Note传过来的数据
 data () {
 	return {
 		entity: this.entityObjectEditor
@@ -101,9 +101,9 @@ createNote () {
 	loadCollection('notes')
 		.then((collection) => {             
 			const entity = collection.insert({  // 向数据库插入笔记
-				body: ''                        	// 初始值为空，等用户在textarea中输入
+				body: ''                    // 初始值为空，等用户在textarea中输入
 			})
-			db.saveDatabase()		            		// 保存修改后的数据库
+			db.saveDatabase()		    // 保存修改后的数据库
 			this.entities.unshift(entity)       // 向data中的entities添加数据
 		})
 }
@@ -131,7 +131,7 @@ updateChild () {
 updateEntity () {
 	loadCollection('notes')
 		.then(collection => {
-			collection.update(this.entity)  		// 向数据库更新用户的输入
+			collection.update(this.entity)  // 向数据库更新用户的输入
 			db.saveDatabase()
 		})
 },
@@ -159,7 +159,7 @@ destroyMethod (id) {
 		return entity.$loki !== id
 	})
 	this.entities = _entities
-  // 再从数据库中把当前选中的值删除
+	// 再从数据库中把当前选中的值删除
 	loadCollection('notes')
 		.then(collection => {
 			collection.remove({"$loki": id})
