@@ -42,7 +42,7 @@ export const entities = state => {
 
 // 以下箭头函数的解释说明
 // export const updated = function (state) {
-// 	return function (noteData) {							// 返回的是一个函数，所以需要调用updated()
+// 	return function (noteData) {    // 返回的是一个函数，所以需要调用updated()
 // 		return moment(noteData.meta.updated).fromNow()
 // 	}
 // }
@@ -68,8 +68,8 @@ import { loadCollection, db } from '../database'
 export default {
 	// 从数据库初始化state.entities的值
 	setInitialData (state) {
-		loadCollection('notes')				// loadCollection方法获取 notes 数据表内容，得到Promise格式
-			.then(collection => {				// collection => db.getCollection('notes')
+		loadCollection('notes')				        // loadCollection方法获取 notes 数据表内容，得到Promise格式
+			.then(collection => {				        // collection => db.getCollection('notes')
 				const _entities = collection.chain()
 					.find()													// 找到所有数据
 					.simplesort('$loki', 'isdesc')	// 按照$loki排序
@@ -179,7 +179,7 @@ methods: {
     // 	return this.$store.actions.initial		
     // },
     ...mapActions([
-    	'initial',      // actions.js initial()
+    	'initial',        // actions.js initial()
     	'createNote'
     ])
 },
