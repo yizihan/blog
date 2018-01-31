@@ -1,0 +1,14 @@
+:root {
+	--mainColor: yellow;
+}
+body {
+	background-color: var(--mainColor);
+	display: flex;
+}
+
+/*.widgets-top: {
+	background-color: var(--mainColor);
+	.nav {}
+	.nav__item {}
+	.nav__item--active {}
+}*/

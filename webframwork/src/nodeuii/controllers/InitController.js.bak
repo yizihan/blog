@@ -1,0 +1,32 @@
+import IndexController from './IndexController';
+
+import { makeInvoker } from 'awilix-koa';
+
+
+// 业务逻辑 控制app
+function makeApi ({testService}) {
+	return {
+		find: (ctx, next) => {
+			console.log('aaa');
+			ctx.body = testService.find();
+			console.log(testService);
+		}
+	}
+}
+const api = makeInvoker(makeApi);
+
+
+// 做了注入的工作
+const IndexControllerIns = new IndexController();
+const InitController = {
+	getAllRouters(app, router) {
+		// 使用koa-simple-router
+		app.use(router(_ => {	
+			_.get('/', api('find'));	// controller去控制render view
+			// _.get('/', IndexControllerIns.render());	// controller去控制render view
+			_.get('/index.html', IndexControllerIns.render());
+		}));
+	}
+}
+
+export default InitController;
