@@ -3,7 +3,13 @@
 BFF全称是Backends For Frontends(服务于前端的后端)
 
 ## 技术栈
-Gulp、Webpack、Node-Koa2、Swig、awilix、log4js、Babel、
+
+- gulp、gulp-babel、gulp-watch、gulp-rollup 打包Node中间层
+- webpack 打包管理静态资源文件
+- koa2 
+- koa-swig 模板引擎
+- awilix [依赖注入](https://github.com/yizihan/Library/issues/3)
+- log4js [日志管理](https://github.com/yizihan/Library/issues/4)
 
 ## nodeuii中间层(Koa)
 ### 目录
