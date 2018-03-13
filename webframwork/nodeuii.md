@@ -1,5 +1,5 @@
 ### 目录
-```
+```javascript
 src
  └─nodeuii
     ├─assets        // 静态资源
@@ -11,7 +11,7 @@ src
     └─app.js        // 入口文件
 ```
 ### 入口文件
-```
+```javascript
 // app.js
 import Koa from 'koa';
 import path from 'path';
@@ -109,7 +109,7 @@ app.listen(config.port, () => {
 ---
 
 ## 使用Gulp打包Node中间层
-```
+```javascript
 // gulpfile.js
 const gulp = require('gulp');
 const babel = require('gulp-babel');
