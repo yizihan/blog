@@ -17,12 +17,12 @@ module.exports = {
 		rules: [
 			{
 				// 使用babel编译jsx文件
-				test: '/.jsx$/',
+				test: /.jsx$/,
 				loader: 'babel-loader'
 			},
 			{
 				// 使用babel编译js文件
-				test: '/.js$/',
+				test: /.js$/,
 				loader: 'babel-loader',
 				exclude: [
 					path.join(__dirname, '../node_modules')
@@ -32,6 +32,7 @@ module.exports = {
 	},
 	plugins: [
 		// process.cwd() => ./ 返回当前目录（绝对路径）
+		// 使用rimraf代替
 		new CleanWebpackPlugin(['dist'], {root: process.cwd()}),
 		// 生成HTML页面，并且在Webpack编译的时候，把生成的文件引入到生成的HTML中
 		new HTMLPlugin()
