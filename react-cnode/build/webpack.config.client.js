@@ -11,7 +11,7 @@ module.exports = {
 	output: {
 		filename: '[name].[hash:5].js',
 		path: path.join(__dirname, '../dist'),
-		publicPath: ''
+		publicPath: '/public'
 	},
 	module: {
 		rules: [
@@ -35,6 +35,9 @@ module.exports = {
 		// 使用rimraf代替
 		new CleanWebpackPlugin(['dist'], {root: process.cwd()}),
 		// 生成HTML页面，并且在Webpack编译的时候，把生成的文件引入到生成的HTML中
-		new HTMLPlugin()
+		// 使用/client/template.html为模板，生成index.html
+		new HTMLPlugin({
+			template: path.join(__dirname, '../client/template.html')
+		})
 	]
 }
