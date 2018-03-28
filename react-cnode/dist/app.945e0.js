@@ -57,7 +57,7 @@
 /******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
 /******/
 /******/ 	// __webpack_public_path__
-/******/ 	__webpack_require__.p = "/public/";
+/******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
 /******/ 	return __webpack_require__(__webpack_require__.s = 0);
@@ -67,7 +67,7 @@
 /* 0 */
 /***/ (function(module, exports) {
 
-console.log('123')
+throw new Error("Module parse failed: Unexpected token (5:16)\nYou may need an appropriate loader to handle this file type.\n| import App from './App.jsx'\r\n| \r\n| ReactDOM.render(<App />, document.body)\r\n| ");
 
 /***/ })
 /******/ ]);
