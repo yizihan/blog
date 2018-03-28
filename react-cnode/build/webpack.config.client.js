@@ -1,4 +1,5 @@
 const path = require('path')
+const webpack = require('webpack')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 const HTMLPlugin = require('html-webpack-plugin')
 
@@ -14,7 +15,7 @@ config = {
 	output: {
 		filename: '[name].[hash:5].js',
 		path: path.join(__dirname, '../dist'),
-		publicPath: '/public'
+		publicPath: '/public/'
 		// 此选项指定在浏览器中所引用的 => http://localhost:3333/public/app.ebaa7.js
 	},
 	module: {
@@ -47,6 +48,13 @@ config = {
 }
 
 if(isDev) {
+	config.entry =  {
+		app: [
+			// 客户端热更新代码时所用到的内容
+			'react-hot-loader/patch',
+			path.join(__dirname, '../client/app.js')
+		]
+	}
 	// "dev:client": "cross-env NODE_ENV=development webpack-dev-server --config build/webpack.config.client.js",
 	// NODE_ENV=development => 手动设置环境变量
 	config.devServer = {
@@ -54,7 +62,8 @@ if(isDev) {
 		port: '9000',
 		contentBase: path.join(__dirname, '../dist'),
 		// 热加载
-		// hot: true,		// => [HMR] Hot Module Replacement is disabled.
+		hot: true,		// => [HMR] Hot Module Replacement is disabled.
+		// 注意与AppContainer连用
 		// 显示错误信息
 		overlay: {
 			errors: true
@@ -63,11 +72,12 @@ if(isDev) {
 		historyApiFallback: {
 			index: '/public/index.html'
 		}
+		// Project is running at http://0.0.0.0:8888/
+		// webpack output is served from /public
+		// Content not from webpack is served from E:\Imooc\blog\react-cnode\dist
+		// 404s will fallback to /public/index.html
 	}
-	// Project is running at http://0.0.0.0:8888/
-	// webpack output is served from /public
-	// Content not from webpack is served from E:\Imooc\blog\react-cnode\dist
-	// 404s will fallback to /public/index.html
+	config.plugins.push(new webpack.HotModuleReplacementPlugin)
 }
 
 module.exports = config
