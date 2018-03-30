@@ -1,42 +1,17 @@
 const path = require('path')
+const webpackMerge = require('webpack-merge')
+const baseConfig = require('./webpack.base.js')
 
-module.exports = {
-	// webpack打包出来的内容是运行在node环境
-	target: 'node',
-	// 定义依赖入口
-	entry: {
-		app: path.join(__dirname, '../client/server.entry.js')
-	},
-	// 打包完输出
-	output: {
-		filename: 'server-entry.js',
-		path: path.join(__dirname, '../dist'),
-		publicPath: '/public',
-		libraryTarget: 'commonjs2'
-	},
-	module: {
-		rules: [
-			{
-				enforce: 'pre',
-				test: /.(js|jsx)$/,
-				loader: 'eslint-loader',
-				exclude: [
-					path.join(__dirname, '../node_modules')
-				]
-			},
-			{
-				// 使用babel编译jsx文件
-				test: /.jsx$/,
-				loader: 'babel-loader'
-			},
-			{
-				// 使用babel编译js文件
-				test: /.js$/,
-				loader: 'babel-loader',
-				exclude: [
-					path.join(__dirname, '../node_modules')
-				]
-			}
-		]
-	}
-}
+module.exports = webpackMerge(baseConfig, {
+  // webpack打包出来的内容是运行在node环境
+  target: 'node',
+  // 定义依赖入口
+  entry: {
+    app: path.join(__dirname, '../client/server.entry.js')
+  },
+  // 打包完输出
+  output: {
+    filename: 'server-entry.js',
+    libraryTarget: 'commonjs2'
+  }
+})

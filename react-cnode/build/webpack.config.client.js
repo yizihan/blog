@@ -1,12 +1,14 @@
 const path = require('path')
 const webpack = require('webpack')
+const webpackMerge = require('webpack-merge')
+const baseConfig = require('./webpack.base.js')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 const HTMLPlugin = require('html-webpack-plugin')
 
 // 判断当前环境是否是开发环境
 const isDev = process.env.NODE_ENV === 'development'
 
-config = {
+config = webpackMerge(baseConfig, {
   // 定义依赖入口
   entry: {
     app: path.join(__dirname, '../client/app.js')
@@ -14,34 +16,10 @@ config = {
   // 打包完输出
   output: {
     filename: '[name].[hash:5].js',
-    path: path.join(__dirname, '../dist'),
-    publicPath: '/public/'
+    // AddTo baseConfig
+    // path: path.join(__dirname, '../dist'),
+    // publicPath: '/public/'
     // 此选项指定在浏览器中所引用的 => http://localhost:3333/public/app.ebaa7.js
-  },
-  module: {
-    rules: [
-      {
-        enforce: 'pre',
-        test: /.(js|jsx)$/,
-        loader: 'eslint-loader',
-        exclude: [
-          path.join(__dirname, '../node_modules')
-        ]
-      },
-      {
-        // 使用babel编译jsx文件
-        test: /.jsx$/,
-        loader: 'babel-loader'
-      },
-      {
-        // 使用babel编译js文件
-        test: /.js$/,
-        loader: 'babel-loader',
-        exclude: [
-          path.join(__dirname, '../node_modules')
-        ]
-      }
-    ]
   },
   plugins: [
     // process.cwd() => ./ 返回当前目录（绝对路径）
@@ -53,7 +31,7 @@ config = {
       template: path.join(__dirname, '../client/template.html')
     })
   ]
-}
+})
 
 if(isDev) {
   config.entry =  {
